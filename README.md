@@ -13,7 +13,7 @@ Validation block example:
 
 Delegate protocol example:
 
-- (BOOL)textFieldIsValid:(JAMValidatingTextField *)textField
-{
-    return (textField.text.length > 10);
-}
+    - (BOOL)textFieldIsValid:(JAMValidatingTextField *)textField
+    {
+        return (textField.text.length > 10);
+    }
