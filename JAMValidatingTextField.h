@@ -32,11 +32,11 @@
 
 @interface JAMValidatingTextField : UITextField
 
-@property (nonatomic, weak) id <JAMValidatingTextFieldValidationDelegate> validationDelegate;
-
 @property (nonatomic, getter = isValid) BOOL valid;
 @property (nonatomic) UIColor *validColor;
 @property (nonatomic) UIColor *inValidColor;
 @property (nonatomic, copy) BOOL (^validationBlock)(void);
+@property (nonatomic) NSRegularExpression *validationRegularExpression;
+@property (nonatomic, weak) id <JAMValidatingTextFieldValidationDelegate> validationDelegate;
 
 @end
