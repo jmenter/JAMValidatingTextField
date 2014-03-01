@@ -72,25 +72,39 @@ static const CGFloat kIndicatorStrokeWidth = 2;
 {
     if (self.validationDelegate)
         self.valid = [self.validationDelegate textFieldIsValid:self];
-     else if (self.validationBlock)
+    else if (self.validationBlock)
         self.valid = self.validationBlock();
+    else if (self.validationRegularExpression)
+        self.valid = (BOOL)[self.validationRegularExpression numberOfMatchesInString:self.text
+                                                                             options:0
+                                                                               range:NSMakeRange(0, self.text.length)];
 }
 
 - (void)setValidationDelegate:(id<JAMValidatingTextFieldValidationDelegate>)validationDelegate;
 {
     _validationDelegate = validationDelegate;
     _validationBlock = nil;
+    _validationRegularExpression = nil;
 }
 
 - (void)setValidationBlock:(BOOL (^)(void))validationBlock;
 {
     _validationBlock = validationBlock;
     _validationDelegate = nil;
+    _validationRegularExpression = nil;
+}
+
+- (void)setValidationRegularExpression:(NSRegularExpression *)validationRegularExpression;
+{
+    _validationRegularExpression = validationRegularExpression;
+    _validationDelegate = nil;
+    _validationBlock = nil;
 }
 
 - (CGRect)rightAlignedStatusViewRect;
 {
-    return CGRectMake(self.bounds.size.width - kStandardTextFieldHeight, 0, kStandardTextFieldHeight, kStandardTextFieldHeight);
+    return CGRectMake(self.bounds.size.width - kStandardTextFieldHeight, 0,
+                      kStandardTextFieldHeight, kStandardTextFieldHeight);
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds;
@@ -152,7 +166,7 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     CGContextSetLineWidth(context, kIndicatorStrokeWidth);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineJoin(context, kCGLineJoinRound);
-    CGContextSetStrokeColorWithColor(context, self.isValid ? self.validColor.CGColor : self.inValidColor.CGColor);
+    CGContextSetStrokeColorWithColor(context, (self.isValid) ? self.validColor.CGColor : self.inValidColor.CGColor);
     return context;
 }
 
