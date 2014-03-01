@@ -7,6 +7,8 @@ There are properties for setting the valid/invalid colors, status, validation bl
 
 The visual feedback by default shows an invalid text field with a red outline and red X, and a valid text field with a green outline and green checkmark.
 
+![example image](http://jeffmenter.files.wordpress.com/2014/02/ios-simulator-screen-shot-feb-28-2014-2-39-22-pm.png "JAMValidatingTextField Example Image")
+
 Example of validating using a block:
 
     textField.validationBlock = ^{
