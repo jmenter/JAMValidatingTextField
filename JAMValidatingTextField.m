@@ -111,13 +111,12 @@ static const CGFloat kIndicatorStrokeWidth = 2;
 
 - (UIImage *)imageForValidStatus;
 {
-    [self beginImageContextAndPathStyle];
-    CGContextSetStrokeColorWithColor(UIGraphicsGetCurrentContext(), self.validColor.CGColor);
+    CGContextRef context = [self beginImageContextAndSetPathStyle];
 
-    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), 6, 14);
-    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), 12, 24);
-    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), 24, 6);
-    CGContextStrokePath(UIGraphicsGetCurrentContext());
+    CGContextMoveToPoint(context, 6, 14);
+    CGContextAddLineToPoint(context, 12, 24);
+    CGContextAddLineToPoint(context, 24, 6);
+    CGContextStrokePath(context);
     
     UIImage *returnImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -126,28 +125,30 @@ static const CGFloat kIndicatorStrokeWidth = 2;
 
 - (UIImage *)imageForInValidStatus
 {
-    [self beginImageContextAndPathStyle];
-    CGContextSetStrokeColorWithColor(UIGraphicsGetCurrentContext(), self.inValidColor.CGColor);
+    CGContextRef context = [self beginImageContextAndSetPathStyle];
 
-    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), 6, 6);
-    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), 24, 24);
-    CGContextStrokePath(UIGraphicsGetCurrentContext());
+    CGContextMoveToPoint(context, 6, 6);
+    CGContextAddLineToPoint(context, 24, 24);
+    CGContextStrokePath(context);
     
-    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), 6, 24);
-    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), 24, 6);
-    CGContextStrokePath(UIGraphicsGetCurrentContext());
+    CGContextMoveToPoint(context, 6, 24);
+    CGContextAddLineToPoint(context, 24, 6);
+    CGContextStrokePath(context);
     
     UIImage *returnImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return returnImage;
 }
 
-- (void)beginImageContextAndPathStyle;
+- (CGContextRef)beginImageContextAndSetPathStyle;
 {
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(kStandardTextFieldHeight, kStandardTextFieldHeight), NO, 0);
-    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), kIndicatorStrokeWidth);
-    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-    CGContextSetLineJoin(UIGraphicsGetCurrentContext(), kCGLineJoinRound);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, kIndicatorStrokeWidth);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineJoin(context, kCGLineJoinRound);
+    CGContextSetStrokeColorWithColor(context, self.isValid ? self.validColor.CGColor : self.inValidColor.CGColor);
+    return context;
 }
 
 @end
