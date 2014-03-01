@@ -68,6 +68,14 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     self.validationStatusImageView.image = (_valid) ? self.imageForValidStatus : self.imageForInValidStatus;
 }
 
+- (void)validate;
+{
+    if (self.validationDelegate)
+        self.valid = [self.validationDelegate textFieldIsValid:self];
+     else if (self.validationBlock)
+        self.valid = self.validationBlock();
+}
+
 - (void)setValidationDelegate:(id<JAMValidatingTextFieldValidationDelegate>)validationDelegate;
 {
     _validationDelegate = validationDelegate;
@@ -80,14 +88,6 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     _validationDelegate = nil;
 }
 
-- (void)validate;
-{
-    if (self.validationDelegate)
-        self.valid = [self.validationDelegate textFieldIsValid:self];
-     else if (self.validationBlock)
-        self.valid = self.validationBlock();
-}
-
 - (CGRect)rightAlignedStatusViewRect;
 {
     return CGRectMake(self.bounds.size.width - kStandardTextFieldHeight, 0, kStandardTextFieldHeight, kStandardTextFieldHeight);
@@ -95,12 +95,17 @@ static const CGFloat kIndicatorStrokeWidth = 2;
 
 - (CGRect)textRectForBounds:(CGRect)bounds;
 {
-    return [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 6, 0, 24))];
+    return [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, self.textRectInsets)];
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds;
 {
-    return [super editingRectForBounds:UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 6, 0, 24))];
+    return [super editingRectForBounds:UIEdgeInsetsInsetRect(bounds, self.textRectInsets)];
+}
+
+- (UIEdgeInsets)textRectInsets;
+{
+    return UIEdgeInsetsMake(0, 6, 0, 24);
 }
 
 - (void)layoutSubviews;
