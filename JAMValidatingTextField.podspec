@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "JAMValidatingTextField"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "JAMValidatingTextField adds validation facilities to UITextField in iOS."
 
   s.description  = <<-DESC
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '6.0'
 
-  s.source       = { :git => "https://github.com/mgroner/JAMValidatingTextField.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/jmenter/JAMValidatingTextField.git", :tag => "0.0.4" }
 
   s.source_files  = 'Classes', '*.{h,m}'
   s.exclude_files = 'Classes/Exclude'
