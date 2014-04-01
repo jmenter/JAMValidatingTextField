@@ -27,8 +27,9 @@ Pod::Spec.new do |s|
                    * Try to keep it short, snappy and to the point.
                    * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
+  s.homepage     = "https://github.com/mgroner/JAMValidatingTextField.git"
 
-  s.homepage     = "https://github.com/jmenter/JAMValidatingTextField"
+  #s.homepage     = "https://github.com/jmenter/JAMValidatingTextField"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
