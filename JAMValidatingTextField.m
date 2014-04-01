@@ -1,4 +1,3 @@
-
  /* The MIT License (MIT)
  
  Copyright (c) 2014 Jeff Menter
@@ -85,6 +84,7 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     _validationDelegate = validationDelegate;
     _validationBlock = nil;
     _validationRegularExpression = nil;
+    [self validate];
 }
 
 - (void)setValidationBlock:(BOOL (^)(void))validationBlock;
@@ -92,6 +92,7 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     _validationBlock = validationBlock;
     _validationDelegate = nil;
     _validationRegularExpression = nil;
+    [self validate];
 }
 
 - (void)setValidationRegularExpression:(NSRegularExpression *)validationRegularExpression;
@@ -99,6 +100,7 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     _validationRegularExpression = validationRegularExpression;
     _validationDelegate = nil;
     _validationBlock = nil;
+    [self validate];
 }
 
 - (CGRect)rightAlignedStatusViewRect;
