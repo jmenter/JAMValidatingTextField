@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "JAMValidatingTextField"
-  s.version      = "0.0.1"
+  s.version      = "0.0.3"
   s.summary      = "JAMValidatingTextField adds validation facilities to UITextField in iOS."
 
   s.description  = <<-DESC
