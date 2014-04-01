@@ -16,6 +16,7 @@ DerivedData
 .idea/
 *.hmap
 *.xccheckout
+JAMValidatingTextField.xcodeproj/project.xcworkspace/xcuserdata/*
 
 #CocoaPods
 Pods
