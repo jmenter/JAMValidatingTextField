@@ -11,11 +11,12 @@
 !default.perspectivev3
 xcuserdata
 profile
-*.moved-aside
+f*.moved-aside
 DerivedData
 .idea/
 *.hmap
 *.xccheckout
+JAMValidatingTextField.xcodeproj/project.xcworkspace/xcuserdata/
 
 #CocoaPods
 Pods
