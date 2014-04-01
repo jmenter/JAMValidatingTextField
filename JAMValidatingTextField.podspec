@@ -5,12 +5,8 @@ Pod::Spec.new do |s|
   s.summary      = "JAMValidatingTextField adds validation facilities to UITextField in iOS."
 
   s.description  = <<-DESC
-                   A longer description of JAMValidatingTextField in Markdown format.
-
-                   * Think: Why did you write this? What is the focus? What does it do?
-                   * CocoaPods will be using this to generate tags, and improve search results.
-                   * Try to keep it short, snappy and to the point.
-                   * Finally, don't worry about the indent, CocoaPods strips it!
+There are properties for setting the valid/invalid colors, status, validation block, validation regular expression, and validation delegate. You can either set the isValid BOOL directly in your controller, assign a validation block, assign an NSRegularExpression, or implement the validation delegate protocol. The assigned validation check gets fired at every change to the text field. Setting one validation method will cancel out the other methods.
+The visual feedback by default shows an invalid text field with a red outline and red X, and a valid text field with a green outline and green checkmark.
                    DESC
 
   s.homepage     = "https://github.com/jmenter/JAMValidatingTextField"
