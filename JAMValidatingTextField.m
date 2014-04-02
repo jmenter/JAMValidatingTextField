@@ -81,26 +81,30 @@ static const CGFloat kIndicatorStrokeWidth = 2;
 
 - (void)setValidationDelegate:(id<JAMValidatingTextFieldValidationDelegate>)validationDelegate;
 {
+    [self clearAllValidationMethods];
     _validationDelegate = validationDelegate;
-    _validationBlock = nil;
-    _validationRegularExpression = nil;
     [self validate];
 }
 
 - (void)setValidationBlock:(BOOL (^)(void))validationBlock;
 {
+    [self clearAllValidationMethods];
     _validationBlock = validationBlock;
-    _validationDelegate = nil;
-    _validationRegularExpression = nil;
     [self validate];
 }
 
 - (void)setValidationRegularExpression:(NSRegularExpression *)validationRegularExpression;
 {
+    [self clearAllValidationMethods];
     _validationRegularExpression = validationRegularExpression;
+    [self validate];
+}
+
+- (void)clearAllValidationMethods;
+{
+    _validationRegularExpression = nil;
     _validationDelegate = nil;
     _validationBlock = nil;
-    [self validate];
 }
 
 - (CGRect)rightAlignedStatusViewRect;

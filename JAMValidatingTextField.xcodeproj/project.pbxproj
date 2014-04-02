@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		631E58BA18EC805300BE1F1A /* JAMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E58B818EC805300BE1F1A /* JAMMainViewController.m */; };
+		631E58BB18EC805300BE1F1A /* JAMMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 631E58B918EC805300BE1F1A /* JAMMainViewController.xib */; };
 		A89E834F18EB04F60054A070 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E834E18EB04F60054A070 /* Foundation.framework */; };
 		A89E835118EB04F60054A070 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E835018EB04F60054A070 /* CoreGraphics.framework */; };
 		A89E835318EB04F60054A070 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E835218EB04F60054A070 /* UIKit.framework */; };
@@ -14,27 +16,15 @@
 		A89E835B18EB04F60054A070 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A89E835A18EB04F60054A070 /* main.m */; };
 		A89E835F18EB04F60054A070 /* JAMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A89E835E18EB04F60054A070 /* JAMAppDelegate.m */; };
 		A89E836118EB04F60054A070 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A89E836018EB04F60054A070 /* Images.xcassets */; };
-		A89E836818EB04F60054A070 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E836718EB04F60054A070 /* XCTest.framework */; };
-		A89E836918EB04F60054A070 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E834E18EB04F60054A070 /* Foundation.framework */; };
-		A89E836A18EB04F60054A070 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E835218EB04F60054A070 /* UIKit.framework */; };
-		A89E837218EB04F60054A070 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A89E837018EB04F60054A070 /* InfoPlist.strings */; };
-		A89E837418EB04F60054A070 /* JAMValidatingTextFieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A89E837318EB04F60054A070 /* JAMValidatingTextFieldTests.m */; };
 		A89E838118EB051B0054A070 /* JAMValidatingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A89E837E18EB051B0054A070 /* JAMValidatingTextField.m */; };
 		A89E838218EB051B0054A070 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A89E837F18EB051B0054A070 /* LICENSE */; };
 		A89E838318EB051B0054A070 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A89E838018EB051B0054A070 /* README.md */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		A89E836B18EB04F60054A070 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A89E834318EB04F60054A070 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A89E834A18EB04F60054A070;
-			remoteInfo = JAMValidatingTextField;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		631E58B718EC805300BE1F1A /* JAMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAMMainViewController.h; sourceTree = "<group>"; };
+		631E58B818EC805300BE1F1A /* JAMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAMMainViewController.m; sourceTree = "<group>"; };
+		631E58B918EC805300BE1F1A /* JAMMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JAMMainViewController.xib; sourceTree = "<group>"; };
 		A89E834B18EB04F60054A070 /* JAMValidatingTextField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JAMValidatingTextField.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A89E834E18EB04F60054A070 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A89E835018EB04F60054A070 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -46,11 +36,6 @@
 		A89E835D18EB04F60054A070 /* JAMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JAMAppDelegate.h; sourceTree = "<group>"; };
 		A89E835E18EB04F60054A070 /* JAMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JAMAppDelegate.m; sourceTree = "<group>"; };
 		A89E836018EB04F60054A070 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A89E836618EB04F60054A070 /* JAMValidatingTextFieldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JAMValidatingTextFieldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A89E836718EB04F60054A070 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		A89E836F18EB04F60054A070 /* JAMValidatingTextFieldTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JAMValidatingTextFieldTests-Info.plist"; sourceTree = "<group>"; };
-		A89E837118EB04F60054A070 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A89E837318EB04F60054A070 /* JAMValidatingTextFieldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JAMValidatingTextFieldTests.m; sourceTree = "<group>"; };
 		A89E837D18EB051B0054A070 /* JAMValidatingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAMValidatingTextField.h; sourceTree = "<group>"; };
 		A89E837E18EB051B0054A070 /* JAMValidatingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JAMValidatingTextField.m; sourceTree = "<group>"; };
 		A89E837F18EB051B0054A070 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -68,16 +53,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A89E836318EB04F60054A070 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A89E836818EB04F60054A070 /* XCTest.framework in Frameworks */,
-				A89E836A18EB04F60054A070 /* UIKit.framework in Frameworks */,
-				A89E836918EB04F60054A070 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -89,7 +64,6 @@
 				A89E837F18EB051B0054A070 /* LICENSE */,
 				A89E838018EB051B0054A070 /* README.md */,
 				A89E835418EB04F60054A070 /* JAMValidatingTextField */,
-				A89E836D18EB04F60054A070 /* JAMValidatingTextFieldTests */,
 				A89E834D18EB04F60054A070 /* Frameworks */,
 				A89E834C18EB04F60054A070 /* Products */,
 			);
@@ -99,7 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				A89E834B18EB04F60054A070 /* JAMValidatingTextField.app */,
-				A89E836618EB04F60054A070 /* JAMValidatingTextFieldTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,7 +83,6 @@
 				A89E834E18EB04F60054A070 /* Foundation.framework */,
 				A89E835018EB04F60054A070 /* CoreGraphics.framework */,
 				A89E835218EB04F60054A070 /* UIKit.framework */,
-				A89E836718EB04F60054A070 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -120,6 +92,9 @@
 			children = (
 				A89E835D18EB04F60054A070 /* JAMAppDelegate.h */,
 				A89E835E18EB04F60054A070 /* JAMAppDelegate.m */,
+				631E58B718EC805300BE1F1A /* JAMMainViewController.h */,
+				631E58B818EC805300BE1F1A /* JAMMainViewController.m */,
+				631E58B918EC805300BE1F1A /* JAMMainViewController.xib */,
 				A89E836018EB04F60054A070 /* Images.xcassets */,
 				A89E835518EB04F60054A070 /* Supporting Files */,
 			);
@@ -133,24 +108,6 @@
 				A89E835718EB04F60054A070 /* InfoPlist.strings */,
 				A89E835A18EB04F60054A070 /* main.m */,
 				A89E835C18EB04F60054A070 /* JAMValidatingTextField-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		A89E836D18EB04F60054A070 /* JAMValidatingTextFieldTests */ = {
-			isa = PBXGroup;
-			children = (
-				A89E837318EB04F60054A070 /* JAMValidatingTextFieldTests.m */,
-				A89E836E18EB04F60054A070 /* Supporting Files */,
-			);
-			path = JAMValidatingTextFieldTests;
-			sourceTree = "<group>";
-		};
-		A89E836E18EB04F60054A070 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A89E836F18EB04F60054A070 /* JAMValidatingTextFieldTests-Info.plist */,
-				A89E837018EB04F60054A070 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -175,24 +132,6 @@
 			productReference = A89E834B18EB04F60054A070 /* JAMValidatingTextField.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A89E836518EB04F60054A070 /* JAMValidatingTextFieldTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A89E837A18EB04F60054A070 /* Build configuration list for PBXNativeTarget "JAMValidatingTextFieldTests" */;
-			buildPhases = (
-				A89E836218EB04F60054A070 /* Sources */,
-				A89E836318EB04F60054A070 /* Frameworks */,
-				A89E836418EB04F60054A070 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A89E836C18EB04F60054A070 /* PBXTargetDependency */,
-			);
-			name = JAMValidatingTextFieldTests;
-			productName = JAMValidatingTextFieldTests;
-			productReference = A89E836618EB04F60054A070 /* JAMValidatingTextFieldTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -202,11 +141,6 @@
 				CLASSPREFIX = JAM;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Jeff Menter";
-				TargetAttributes = {
-					A89E836518EB04F60054A070 = {
-						TestTargetID = A89E834A18EB04F60054A070;
-					};
-				};
 			};
 			buildConfigurationList = A89E834618EB04F60054A070 /* Build configuration list for PBXProject "JAMValidatingTextField" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -221,7 +155,6 @@
 			projectRoot = "";
 			targets = (
 				A89E834A18EB04F60054A070 /* JAMValidatingTextField */,
-				A89E836518EB04F60054A070 /* JAMValidatingTextFieldTests */,
 			);
 		};
 /* End PBXProject section */
@@ -235,14 +168,7 @@
 				A89E835918EB04F60054A070 /* InfoPlist.strings in Resources */,
 				A89E838318EB051B0054A070 /* README.md in Resources */,
 				A89E836118EB04F60054A070 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A89E836418EB04F60054A070 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A89E837218EB04F60054A070 /* InfoPlist.strings in Resources */,
+				631E58BB18EC805300BE1F1A /* JAMMainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,41 +181,18 @@
 			files = (
 				A89E838118EB051B0054A070 /* JAMValidatingTextField.m in Sources */,
 				A89E835B18EB04F60054A070 /* main.m in Sources */,
+				631E58BA18EC805300BE1F1A /* JAMMainViewController.m in Sources */,
 				A89E835F18EB04F60054A070 /* JAMAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A89E836218EB04F60054A070 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A89E837418EB04F60054A070 /* JAMValidatingTextFieldTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A89E836C18EB04F60054A070 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A89E834A18EB04F60054A070 /* JAMValidatingTextField */;
-			targetProxy = A89E836B18EB04F60054A070 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A89E835718EB04F60054A070 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A89E835818EB04F60054A070 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		A89E837018EB04F60054A070 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A89E837118EB04F60054A070 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -329,7 +232,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -362,7 +265,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -395,46 +298,6 @@
 			};
 			name = Release;
 		};
-		A89E837B18EB04F60054A070 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JAMValidatingTextField.app/JAMValidatingTextField";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "JAMValidatingTextField/JAMValidatingTextField-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "JAMValidatingTextFieldTests/JAMValidatingTextFieldTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		A89E837C18EB04F60054A070 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JAMValidatingTextField.app/JAMValidatingTextField";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "JAMValidatingTextField/JAMValidatingTextField-Prefix.pch";
-				INFOPLIST_FILE = "JAMValidatingTextFieldTests/JAMValidatingTextFieldTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -454,14 +317,7 @@
 				A89E837918EB04F60054A070 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		A89E837A18EB04F60054A070 /* Build configuration list for PBXNativeTarget "JAMValidatingTextFieldTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A89E837B18EB04F60054A070 /* Debug */,
-				A89E837C18EB04F60054A070 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
