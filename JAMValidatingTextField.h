@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, JAMValidatingTextFieldType) {
     JAMValidatingTextFieldTypeZIP
 };
 
-/** One of the validation options. */
+/** The delegate is used for validation if it is assigned. */
 @protocol JAMValidatingTextFieldValidationDelegate <NSObject>
 @optional
 -(JAMValidatingTextFieldStatus)textFieldStatus:(JAMValidatingTextField *)textField;
@@ -58,20 +58,20 @@ typedef NS_ENUM(NSUInteger, JAMValidatingTextFieldType) {
 /** Use this to get the validation status of your text field. */
 @property (nonatomic, readonly) JAMValidatingTextFieldStatus validationStatus;
 
-/** Use this property to quickly set a validation type for your text field. */
+/** Use this property to easily set a validation type for your text field. */
 @property (nonatomic) JAMValidatingTextFieldType validationType;
 
-/** Setting isRequired to YES will cause the textfield to appear invalid even when it is empty. */
+/** Normally, an empty text field is considered "indeterminate." Setting isRequired to YES will cause the textfield to be considered invalid even when it is empty. */
 @property (nonatomic, getter = isRequired) BOOL required;
 
 /** The color of the indeterminate indicator, default is 75% white. */
 @property (nonatomic) UIColor *indeterminateColor;
-/** The color of the invalid indicator, default is red. */
+/** The color of the invalid indicator, default is kind of red. */
 @property (nonatomic) UIColor *invalidColor;
-/** The color of the invalid indicator, default is green. */
+/** The color of the invalid indicator, default is kind of green. */
 @property (nonatomic) UIColor *validColor;
 
-/** @warning Validation methods (block, Regex, or delegate) and types are all mutally exclusive, that is, setting any one will clear out all the others. */
+/** @warning Validation methods (block, Regex, or delegate) and the built-in types are all mutally exclusive, that is, setting any one will clear out the others. */
 /** Sets the validation mechanism to be a block.
  @param validationBlock the block to use to validate the text field.
  */

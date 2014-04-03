@@ -75,15 +75,15 @@ static const CGFloat kTextEdgeInset = 6;
     switch (status) {
         case JAMValidatingTextFieldStatusIndeterminate:
             self.layer.borderColor = self.indeterminateColor.CGColor;
-            self.rightView = self.imageForIndeterminateStatus;
+            self.rightView = self.imageViewForIndeterminateStatus;
             break;
         case JAMValidatingTextFieldStatusInvalid:
             self.layer.borderColor = self.invalidColor.CGColor;
-            self.rightView = self.imageForInvalidStatus;
+            self.rightView = self.imageViewForInvalidStatus;
             break;
         case JAMValidatingTextFieldStatusValid:
             self.layer.borderColor = self.validColor.CGColor;
-            self.rightView = self.imageForValidStatus;
+            self.rightView = self.imageViewForValidStatus;
             break;
     }
     self.rightViewMode = UITextFieldViewModeAlways;
@@ -132,7 +132,7 @@ static const CGFloat kTextEdgeInset = 6;
     [self validate];
 }
 
-#pragma mark - Setting specific validation types
+#pragma mark - Setting built-in validation types
 - (void)applyEmailValidation;
 {
     [self clearAllValidationMethods];
@@ -233,7 +233,9 @@ static const CGFloat kTextEdgeInset = 6;
 }
 
 #pragma mark - Indicator Image Generation
-- (UIImageView *)imageForIndeterminateStatus;
+
+/** This shape is a dash */
+- (UIImageView *)imageViewForIndeterminateStatus;
 {
     CGContextRef context = [self beginImageContextAndSetPathStyle];
 
@@ -241,22 +243,11 @@ static const CGFloat kTextEdgeInset = 6;
     CGContextAddLineToPoint(context, 24, kStandardTextFieldHeight / 2.f);
     CGContextStrokePath(context);
     
-    return [self finalizeImageContext];
+    return [self finalizeImageContextAndReturnImageView];
 }
 
-- (UIImageView *)imageForValidStatus;
-{
-    CGContextRef context = [self beginImageContextAndSetPathStyle];
-
-    CGContextMoveToPoint(context, 6, 14);
-    CGContextAddLineToPoint(context, 12, 24);
-    CGContextAddLineToPoint(context, 24, 6);
-    CGContextStrokePath(context);
-    
-    return [self finalizeImageContext];
-}
-
-- (UIImageView *)imageForInvalidStatus
+/** This shape is an X */
+- (UIImageView *)imageViewForInvalidStatus
 {
     CGContextRef context = [self beginImageContextAndSetPathStyle];
 
@@ -268,7 +259,20 @@ static const CGFloat kTextEdgeInset = 6;
     CGContextAddLineToPoint(context, 24, 6);
     CGContextStrokePath(context);
     
-    return [self finalizeImageContext];
+    return [self finalizeImageContextAndReturnImageView];
+}
+
+/** This shape is a check mark */
+- (UIImageView *)imageViewForValidStatus;
+{
+    CGContextRef context = [self beginImageContextAndSetPathStyle];
+
+    CGContextMoveToPoint(context, 6, 14);
+    CGContextAddLineToPoint(context, 12, 24);
+    CGContextAddLineToPoint(context, 24, 6);
+    CGContextStrokePath(context);
+    
+    return [self finalizeImageContextAndReturnImageView];
 }
 
 - (CGContextRef)beginImageContextAndSetPathStyle;
@@ -287,7 +291,7 @@ static const CGFloat kTextEdgeInset = 6;
     return context;
 }
 
-- (UIImageView *)finalizeImageContext;
+- (UIImageView *)finalizeImageContextAndReturnImageView;
 {
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
