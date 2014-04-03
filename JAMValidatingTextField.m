@@ -23,21 +23,23 @@
 #import "JAMValidatingTextField.h"
 
 @interface JAMValidatingTextField ()
-@property (nonatomic) UIImageView *validationStatusImageView;
+@property (nonatomic, readwrite) JAMValidatingTextFieldStatus validationStatus;
 @end
 
 @implementation JAMValidatingTextField
 
 static const CGFloat kStandardTextFieldHeight = 30;
 static const CGFloat kIndicatorStrokeWidth = 2;
+static const CGFloat kTextEdgeInset = 6;
 
-- (id)initWithFrame:(CGRect)frame;
+#pragma mark - Initialization
+- (instancetype)initWithFrame:(CGRect)frame;
 {
     if (!(self = [super initWithFrame:frame])) return nil;
     return [self initialize];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
 {
     if (!(self = [super initWithCoder:aDecoder])) return nil;
     return [self initialize];
@@ -46,37 +48,67 @@ static const CGFloat kIndicatorStrokeWidth = 2;
 - (instancetype)initialize;
 {
     self.borderStyle = UITextBorderStyleNone;
-    self.validationStatusImageView = [UIImageView.alloc initWithFrame:self.rightAlignedStatusViewRect];
-    [self addSubview:self.validationStatusImageView];
     
     self.validColor = [UIColor colorWithHue:0.333 saturation:1 brightness:0.75 alpha:1];
-    self.inValidColor = [UIColor colorWithHue:0 saturation:1 brightness:1 alpha:1];
+    self.invalidColor = [UIColor colorWithHue:0 saturation:1 brightness:1 alpha:1];
+    self.indeterminateColor = [UIColor colorWithWhite:0.75 alpha:1.0];
     
     self.layer.borderWidth = 1;
     self.layer.cornerRadius = 5;
     
     [self addTarget:self action:@selector(validate) forControlEvents:UIControlEventAllEditingEvents];
-    self.valid = NO;
+    
+    self.validationStatus = JAMValidatingTextFieldStatusIndeterminate;
     return self;
 }
 
-- (void)setValid:(BOOL)valid;
+#pragma mark - Setters
+- (void)setRequired:(BOOL)required
 {
-    _valid = valid;
-    self.layer.borderColor = (_valid) ? self.validColor.CGColor : self.inValidColor.CGColor;
-    self.validationStatusImageView.image = (_valid) ? self.imageForValidStatus : self.imageForInValidStatus;
+    _required = required;
+    [self validate];
 }
 
-- (void)validate;
+- (void)setValidationStatus:(JAMValidatingTextFieldStatus)status;
 {
-    if (self.validationDelegate)
-        self.valid = [self.validationDelegate textFieldIsValid:self];
-    else if (self.validationBlock)
-        self.valid = self.validationBlock();
-    else if (self.validationRegularExpression)
-        self.valid = (BOOL)[self.validationRegularExpression numberOfMatchesInString:self.text
-                                                                             options:0
-                                                                               range:NSMakeRange(0, self.text.length)];
+    _validationStatus = status;
+    switch (status) {
+        case JAMValidatingTextFieldStatusIndeterminate:
+            self.layer.borderColor = self.indeterminateColor.CGColor;
+            self.rightView = self.imageForIndeterminateStatus;
+            break;
+        case JAMValidatingTextFieldStatusInvalid:
+            self.layer.borderColor = self.invalidColor.CGColor;
+            self.rightView = self.imageForInvalidStatus;
+            break;
+        case JAMValidatingTextFieldStatusValid:
+            self.layer.borderColor = self.validColor.CGColor;
+            self.rightView = self.imageForValidStatus;
+            break;
+    }
+    self.rightViewMode = UITextFieldViewModeAlways;
+}
+
+- (void)setValidationType:(JAMValidatingTextFieldType)validationType;
+{
+    _validationType = validationType;
+    switch (validationType) {
+        case JAMValidatingTextFieldTypeEmail:
+            [self applyEmailValidation];
+            break;
+        case JAMValidatingTextFieldTypeURL:
+            [self applyURLValidation];
+            break;
+        case JAMValidatingTextFieldTypePhone:
+            [self applyPhoneValidation];
+            break;
+        case JAMValidatingTextFieldTypeZIP:
+            [self applyZIPValidation];
+            break;
+        default:
+            [self clearAllValidationMethods];
+            break;
+    }
 }
 
 - (void)setValidationDelegate:(id<JAMValidatingTextFieldValidationDelegate>)validationDelegate;
@@ -86,7 +118,7 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     [self validate];
 }
 
-- (void)setValidationBlock:(BOOL (^)(void))validationBlock;
+- (void)setValidationBlock:(JAMValidatingTextFieldStatus (^)(void))validationBlock;
 {
     [self clearAllValidationMethods];
     _validationBlock = validationBlock;
@@ -100,41 +132,119 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     [self validate];
 }
 
+#pragma mark - Setting specific validation types
+- (void)applyEmailValidation;
+{
+    [self clearAllValidationMethods];
+    __weak JAMValidatingTextField *weakSelf = self;
+    self.validationBlock = ^{
+        if (weakSelf.text.length == 0 && !weakSelf.isRequired) {
+            return JAMValidatingTextFieldStatusIndeterminate;
+        }
+        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:NULL];
+        NSArray *matches = [detector matchesInString:weakSelf.text options:0 range:NSMakeRange(0, weakSelf.text.length)];
+        for (NSTextCheckingResult *match in matches) {
+            if (match.resultType == NSTextCheckingTypeLink &&
+                [match.URL.absoluteString rangeOfString:@"mailto:"].location != NSNotFound) {
+                return JAMValidatingTextFieldStatusValid;
+            }
+        }
+        return JAMValidatingTextFieldStatusInvalid;
+    };
+    [self validate];
+}
+
+- (void)applyURLValidation;
+{
+    [self clearAllValidationMethods];
+    __weak JAMValidatingTextField *weakSelf = self;
+    self.validationBlock = ^{
+        if (weakSelf.text.length == 0 && !weakSelf.isRequired) {
+            return JAMValidatingTextFieldStatusIndeterminate;
+        }
+        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:NULL];
+        NSArray *matches = [detector matchesInString:weakSelf.text options:0 range:NSMakeRange(0, weakSelf.text.length)];
+        return (NSInteger)matches.count;
+    };
+    [self validate];
+}
+
+- (void)applyPhoneValidation;
+{
+    [self clearAllValidationMethods];
+    __weak JAMValidatingTextField *weakSelf = self;
+    self.validationBlock = ^{
+        if (weakSelf.text.length == 0 && !weakSelf.isRequired) {
+            return JAMValidatingTextFieldStatusIndeterminate;
+        }
+        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypePhoneNumber error:NULL];
+        NSArray *matches = [detector matchesInString:weakSelf.text options:0 range:NSMakeRange(0, weakSelf.text.length)];
+        return (NSInteger)matches.count;
+    };
+    [self validate];
+}
+
+- (void)applyZIPValidation;
+{
+    [self clearAllValidationMethods];
+    __weak JAMValidatingTextField *weakSelf = self;
+    self.validationBlock = ^{
+        if (weakSelf.text.length == 0 && !weakSelf.isRequired) {
+            return JAMValidatingTextFieldStatusIndeterminate;
+        }
+        NSString *justNumbers = [[weakSelf.text componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+        if (justNumbers.length == 5 || justNumbers.length == 9) {
+            return JAMValidatingTextFieldStatusValid;
+        }
+        return JAMValidatingTextFieldStatusInvalid;
+    };
+    [self validate];
+}
+
 - (void)clearAllValidationMethods;
 {
     _validationRegularExpression = nil;
     _validationDelegate = nil;
     _validationBlock = nil;
+    _validationType = JAMValidatingTextFieldTypeNone;
 }
 
-- (CGRect)rightAlignedStatusViewRect;
+#pragma mark - Validation
+- (void)validate;
 {
-    return CGRectMake(self.bounds.size.width - kStandardTextFieldHeight, 0,
-                      kStandardTextFieldHeight, kStandardTextFieldHeight);
+    if (self.validationDelegate) {
+        self.validationStatus = [self.validationDelegate textFieldStatus:self];
+    } else if (self.validationBlock) {
+        self.validationStatus = self.validationBlock();
+    } else if (self.validationRegularExpression) {
+        [self validateWithRegularExpression];
+    }
 }
 
-- (CGRect)textRectForBounds:(CGRect)bounds;
+- (void)validateWithRegularExpression
 {
-    return [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, self.textRectInsets)];
+    if (self.text.length == 0 && !self.isRequired) {
+        self.validationStatus = JAMValidatingTextFieldStatusIndeterminate;
+    } else if ([self.validationRegularExpression numberOfMatchesInString:self.text options:0 range:NSMakeRange(0, self.text.length)]) {
+        self.validationStatus = JAMValidatingTextFieldStatusValid;
+    } else {
+        self.validationStatus = JAMValidatingTextFieldStatusInvalid;
+    }
 }
 
-- (CGRect)editingRectForBounds:(CGRect)bounds;
+#pragma mark - Indicator Image Generation
+- (UIImageView *)imageForIndeterminateStatus;
 {
-    return [super editingRectForBounds:UIEdgeInsetsInsetRect(bounds, self.textRectInsets)];
+    CGContextRef context = [self beginImageContextAndSetPathStyle];
+
+    CGContextMoveToPoint(context, 6, kStandardTextFieldHeight / 2.f);
+    CGContextAddLineToPoint(context, 24, kStandardTextFieldHeight / 2.f);
+    CGContextStrokePath(context);
+    
+    return [self finalizeImageContext];
 }
 
-- (UIEdgeInsets)textRectInsets;
-{
-    return UIEdgeInsetsMake(0, 6, 0, 24);
-}
-
-- (void)layoutSubviews;
-{
-    [super layoutSubviews];
-    self.validationStatusImageView.frame = self.rightAlignedStatusViewRect;
-}
-
-- (UIImage *)imageForValidStatus;
+- (UIImageView *)imageForValidStatus;
 {
     CGContextRef context = [self beginImageContextAndSetPathStyle];
 
@@ -143,12 +253,10 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     CGContextAddLineToPoint(context, 24, 6);
     CGContextStrokePath(context);
     
-    UIImage *returnImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return returnImage;
+    return [self finalizeImageContext];
 }
 
-- (UIImage *)imageForInValidStatus
+- (UIImageView *)imageForInvalidStatus
 {
     CGContextRef context = [self beginImageContextAndSetPathStyle];
 
@@ -160,9 +268,7 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     CGContextAddLineToPoint(context, 24, 6);
     CGContextStrokePath(context);
     
-    UIImage *returnImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return returnImage;
+    return [self finalizeImageContext];
 }
 
 - (CGContextRef)beginImageContextAndSetPathStyle;
@@ -172,8 +278,34 @@ static const CGFloat kIndicatorStrokeWidth = 2;
     CGContextSetLineWidth(context, kIndicatorStrokeWidth);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineJoin(context, kCGLineJoinRound);
-    CGContextSetStrokeColorWithColor(context, (self.isValid) ? self.validColor.CGColor : self.inValidColor.CGColor);
+    
+    CGColorRef strokeColor = self.indeterminateColor.CGColor;
+    if (self.validationStatus == JAMValidatingTextFieldStatusInvalid) strokeColor = self.invalidColor.CGColor;
+    if (self.validationStatus == JAMValidatingTextFieldStatusValid) strokeColor = self.validColor.CGColor;
+    
+    CGContextSetStrokeColorWithColor(context, strokeColor);
     return context;
 }
+
+- (UIImageView *)finalizeImageContext;
+{
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return [UIImageView.alloc initWithImage:image];
+}
+
+#pragma mark - Custom UITextField rect sizing
+- (CGRect)textRectForBounds:(CGRect)bounds;
+{
+    return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, kTextEdgeInset,
+                                                          0, kStandardTextFieldHeight - kTextEdgeInset));
+}
+
+- (CGRect)editingRectForBounds:(CGRect)bounds;
+{
+    return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, kTextEdgeInset,
+                                                          0, kStandardTextFieldHeight - kTextEdgeInset));
+}
+
 
 @end
