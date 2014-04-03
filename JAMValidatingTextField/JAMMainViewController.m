@@ -4,9 +4,13 @@
 
 @interface JAMMainViewController () <JAMValidatingTextFieldValidationDelegate>
 @property (weak, nonatomic) IBOutlet JAMValidatingTextField *emailTextField;
-@property (weak, nonatomic) IBOutlet JAMValidatingTextField *charactersTextField;
-@property (weak, nonatomic) IBOutlet JAMValidatingTextField *letterTextField;
+@property (weak, nonatomic) IBOutlet JAMValidatingTextField *urlTextField;
+@property (weak, nonatomic) IBOutlet JAMValidatingTextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet JAMValidatingTextField *zipTextField;
+@property (weak, nonatomic) IBOutlet JAMValidatingTextField *blockTextField;
+@property (weak, nonatomic) IBOutlet JAMValidatingTextField *delegateTextField;
+@property (weak, nonatomic) IBOutlet JAMValidatingTextField *regexTextField;
+
 @end
 
 @implementation JAMMainViewController
@@ -14,18 +18,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSRegularExpression *emailRegex = [NSRegularExpression regularExpressionWithPattern:@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}" options:NSRegularExpressionCaseInsensitive error:nil];
-
-    self.emailTextField.validationRegularExpression = emailRegex;
-    self.charactersTextField.validationType = JAMValidatingTextFieldTypeURL;
-    self.charactersTextField.required = YES;
-    self.letterTextField.validationType = JAMValidatingTextFieldTypePhone;
+    self.emailTextField.validationType = JAMValidatingTextFieldTypeEmail;
+    self.urlTextField.validationType = JAMValidatingTextFieldTypeURL;
+    self.phoneTextField.validationType = JAMValidatingTextFieldTypePhone;
+    self.phoneTextField.required = YES;
     self.zipTextField.validationType = JAMValidatingTextFieldTypeZIP;
-}
-
-- (void)viewDidAppear:(BOOL)animated;
-{
-    [super viewDidAppear:animated];
+    self.zipTextField.required = YES;
+    self.blockTextField.validationBlock = ^{
+        if (self.blockTextField.text.length == 0) {
+            return JAMValidatingTextFieldStatusIndeterminate;
+        }
+        if (self.blockTextField.text.length > 5) {
+            return JAMValidatingTextFieldStatusValid;
+        }
+        return JAMValidatingTextFieldStatusInvalid;
+    };
+    self.delegateTextField.validationDelegate = self;
+    self.regexTextField.validationRegularExpression = [NSRegularExpression regularExpressionWithPattern:@"[0-9]{5}" options:0 error:nil];
+    self.regexTextField.required = YES;
 }
 
 - (JAMValidatingTextFieldStatus)textFieldStatus:(JAMValidatingTextField *)textField;

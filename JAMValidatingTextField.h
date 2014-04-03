@@ -61,7 +61,7 @@ typedef NS_ENUM(NSUInteger, JAMValidatingTextFieldType) {
 /** Use this property to quickly set a validation type for your text field. */
 @property (nonatomic) JAMValidatingTextFieldType validationType;
 
-/** Setting isRequired to YES will cause the textfield to appear invalid when it is empty. */
+/** Setting isRequired to YES will cause the textfield to appear invalid even when it is empty. */
 @property (nonatomic, getter = isRequired) BOOL required;
 
 /** The color of the indeterminate indicator, default is 75% white. */

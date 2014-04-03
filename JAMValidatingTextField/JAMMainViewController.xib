@@ -7,11 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JAMMainViewController">
             <connections>
-                <outlet property="charactersTextField" destination="j0h-xy-XR7" id="HIV-om-Ai9"/>
-                <outlet property="emailTextField" destination="cEC-qQ-9nW" id="hNX-Id-Evt"/>
-                <outlet property="letterTextField" destination="dNA-wS-cj5" id="kk2-4O-FYg"/>
+                <outlet property="blockTextField" destination="gWJ-uU-XYP" id="Tg1-5R-yGN"/>
+                <outlet property="delegateTextField" destination="F33-U7-Ab5" id="ZXN-ff-Orc"/>
+                <outlet property="emailTextField" destination="cEC-qQ-9nW" id="wVX-3b-k3v"/>
+                <outlet property="phoneTextField" destination="dNA-wS-cj5" id="jzl-q3-1cy"/>
+                <outlet property="regexTextField" destination="3Gm-b4-Y94" id="QHX-EA-ezd"/>
+                <outlet property="urlTextField" destination="j0h-xy-XR7" id="U6o-Vh-cFg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="zipTextField" destination="gWJ-uU-XYP" id="piw-M5-ayw"/>
+                <outlet property="zipTextField" destination="WPj-FR-uBN" id="dVn-B3-bu9"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -20,45 +23,70 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter an email address…" minimumFontSize="17" id="cEC-qQ-9nW" customClass="JAMValidatingTextField">
-                    <rect key="frame" x="20" y="51" width="280" height="30"/>
+                    <rect key="frame" x="20" y="41" width="280" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter URL…" minimumFontSize="17" id="j0h-xy-XR7" customClass="JAMValidatingTextField">
-                    <rect key="frame" x="20" y="122" width="280" height="30"/>
+                    <rect key="frame" x="20" y="79" width="280" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a 'P'…" minimumFontSize="17" id="dNA-wS-cj5" customClass="JAMValidatingTextField">
-                    <rect key="frame" x="20" y="194" width="280" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter phone number (required)…" minimumFontSize="17" id="dNA-wS-cj5" customClass="JAMValidatingTextField">
+                    <rect key="frame" x="20" y="117" width="280" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a 'P'…" minimumFontSize="17" id="gWJ-uU-XYP" customClass="JAMValidatingTextField">
-                    <rect key="frame" x="20" y="232" width="280" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a ZIP Code (required)…" minimumFontSize="17" id="WPj-FR-uBN" customClass="JAMValidatingTextField">
+                    <rect key="frame" x="20" y="155" width="280" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validation via NSRegularExpression:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cgQ-R0-0cG">
-                    <rect key="frame" x="20" y="30" width="280" height="13"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter > 5 letters…" minimumFontSize="17" id="gWJ-uU-XYP" customClass="JAMValidatingTextField">
+                    <rect key="frame" x="20" y="214" width="280" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a 'P'…" minimumFontSize="17" id="F33-U7-Ab5" customClass="JAMValidatingTextField">
+                    <rect key="frame" x="20" y="274" width="280" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validation via built-in types:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cgQ-R0-0cG">
+                    <rect key="frame" x="20" y="20" width="280" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validation via block:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vrm-dp-X37">
-                    <rect key="frame" x="20" y="101" width="280" height="14"/>
+                    <rect key="frame" x="20" y="192" width="280" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validation via delegate:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oZX-vX-xIw">
-                    <rect key="frame" x="20" y="172" width="280" height="14"/>
+                    <rect key="frame" x="20" y="252" width="280" height="14"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter 5 numbers (required)…" minimumFontSize="17" id="3Gm-b4-Y94" customClass="JAMValidatingTextField">
+                    <rect key="frame" x="20" y="334" width="280" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validation via NSRegularExpression:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A0G-c5-ohk">
+                    <rect key="frame" x="20" y="312" width="280" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
