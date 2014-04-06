@@ -3,26 +3,39 @@ JAMValidatingTextField
 
 JAMValidatingTextField adds validation facilities to UITextField in iOS, solving the problem of how to visually indicate that a text field's contents are valid.
 
-There are properties for setting the valid/invalid colors, status, validation block, validation regular expression, and validation delegate. You can either set the isValid BOOL directly in your controller, assign a validation block, assign an NSRegularExpression, or implement the validation delegate protocol. The assigned validation check gets fired at every change to the text field. Setting one validation method will cancel out the other methods.
+It extends the basic UITextField to have three different validation states; valid, invalid, and indeterminate. Validation is applied by either setting a built-in validation type (email, URL, phone, or zip code) or by assigning a validation block, an NSRegularExpression, or good old delegate.
 
-The visual feedback by default shows an invalid text field with a red outline and red X, and a valid text field with a green outline and green checkmark.
+The visual feedback by default shows an indeterminate text field with a gray outline and gray dash. An invalid text field has a red outline and red X, and a valid text field has a green outline and green checkmark. Empty text fields are considered "indeterminate" unless you set isRequired to YES.
 
-![example image](http://jeffmenter.files.wordpress.com/2014/02/ios-simulator-screen-shot-feb-28-2014-2-39-22-pm.png "JAMValidatingTextField Example Image")
+![example image](https://raw.githubusercontent.com/jmenter/JAMValidatingTextField/master/example.png "JAMValidatingTextField Example Image")
+
+Example of setting validation to a built-in type:
+
+    self.emailTextField.validationType = JAMValidatingTextFieldTypeEmail;
 
 Example of validating using a block:
 
-    textField.validationBlock = ^{
-        return (BOOL)(textField.text.length > 3);
+    self.blockTextField.validationBlock = ^{
+        if (self.blockTextField.text.length == 0) {
+            return JAMValidatingTextFieldStatusIndeterminate;
+        }
+        if (self.blockTextField.text.length > 5) {
+            return JAMValidatingTextFieldStatusValid;
+        }
+        return JAMValidatingTextFieldStatusInvalid;
     };
 
 Example of validating using the delegate protocol:
 
-    - (BOOL)textFieldIsValid:(JAMValidatingTextField *)textField
+    - (JAMValidatingTextFieldStatus)textFieldStatus:(JAMValidatingTextField *)textField;
     {
-        return (textField.text.length > 10);
+        if (textField.text.length == 0) {
+            return JAMValidatingTextFieldStatusIndeterminate;
+        }
+        return [textField.text rangeOfString:@"P"].location != NSNotFound;
     }
 
 Example of validating using an NSRegularExpression:
 
-    NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
-    self.textField.validationRegularExpression = [NSRegularExpression regularExpressionWithPattern:emailRegEx options:NSRegularExpressionCaseInsensitive error:nil];
+    self.regexTextField.validationRegularExpression = [NSRegularExpression regularExpressionWithPattern:@"[0-9]{5}" options:0 error:nil];
+    self.regexTextField.required = YES;
