@@ -1,7 +1,7 @@
 JAMValidatingTextField
 ======================
 
-JAMValidatingTextField adds validation facilities to UITextField in iOS, solving the problem of how to visually indicate that a text field's contents are valid.
+JAMValidatingTextField adds validation facilities to UITextField in iOS, solving the problem of how to visually indicate that a text field's contents are valid to the user.
 
 It extends the basic UITextField to have three different validation states; valid, invalid, and indeterminate. Validation is applied by either setting a built-in validation type (email, URL, phone, or zip code) or by assigning a validation block, an NSRegularExpression, or good old delegate.
 
