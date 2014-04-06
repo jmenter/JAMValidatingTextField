@@ -7,6 +7,8 @@ It extends the basic UITextField to have three different validation states; vali
 
 The visual feedback by default shows an indeterminate text field with a gray outline and gray dash. An invalid text field has a red outline and red X, and a valid text field has a green outline and green checkmark. Empty text fields are considered "indeterminate" unless isRequired is set to YES.
 
+The visuals are generated programmatically so the class is totally self contained. All you need is the .h and .m files.
+
 ![example image](https://raw.githubusercontent.com/jmenter/JAMValidatingTextField/master/example.png "JAMValidatingTextField Example Image")
 
 Example of setting validation to a built-in type:
