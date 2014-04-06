@@ -5,7 +5,7 @@ JAMValidatingTextField adds validation facilities to UITextField in iOS, solving
 
 It extends the basic UITextField to have three different validation states; valid, invalid, and indeterminate. Validation is applied by either setting a built-in validation type (email, URL, phone, or zip code) or by assigning a validation block, an NSRegularExpression, or good old delegate.
 
-The visual feedback by default shows an indeterminate text field with a gray outline and gray dash. An invalid text field has a red outline and red X, and a valid text field has a green outline and green checkmark. Empty text fields are considered "indeterminate" unless you set isRequired to YES.
+The visual feedback by default shows an indeterminate text field with a gray outline and gray dash. An invalid text field has a red outline and red X, and a valid text field has a green outline and green checkmark. Empty text fields are considered "indeterminate" unless isRequired is set to YES.
 
 ![example image](https://raw.githubusercontent.com/jmenter/JAMValidatingTextField/master/example.png "JAMValidatingTextField Example Image")
 
